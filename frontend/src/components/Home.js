@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import { useSearchParams } from "react-router-dom";
 import searchAPI from "./api/searchAPI";
+import { useSearchParams } from "react-router-dom";
 
-const Home = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
+const Home = (props) => {
   const [searches, setSearches] = useState([]);
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const loadSearches = async (searchData) => {
     const data = await searchAPI.getSearches(searchData);
@@ -20,6 +20,7 @@ const Home = () => {
       <div>
         <nav>
           <input
+            placeholder="Search"
             value={searchParams.get("filter") || ""}
             onChange={(event) => {
               let filter = event.target.value;
